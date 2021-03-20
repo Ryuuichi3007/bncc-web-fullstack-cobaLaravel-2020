@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@home');
+// Route::get('/', 'HomeController@home');
 
-Route::get('/index', 'HomeController@home');
+// Route::get('/master', 'HomeController@home');
+
+Route::get('/', function(){
+  return view('adminLTE/partial.content1');
+});
+
+Route::get('/data-tables', function(){
+  return view('adminLTE/partial.content2');
+});
 
 Route::get('/register', 'AuthController@register');
 
