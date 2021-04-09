@@ -23,7 +23,7 @@
       <th>Delete</th>
     </tr>
     
-    @foreach ($newquestion as $table)
+    @foreach ($newquestion as $table) 
       <tr>
         <td>{{$table->task}} &nbsp;</td>
         <td><a class="btn btn-success" href="{{url('/pertanyaan/show') . '/' . $table->id}}" role="button">Details</a></td>

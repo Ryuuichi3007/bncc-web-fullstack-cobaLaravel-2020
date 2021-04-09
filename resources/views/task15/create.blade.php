@@ -14,7 +14,7 @@
         <h1>Create New Question</h1>
         <br>
         <hr>
-  
+        
         <form action="{{url('/pertanyaan')}}" method="POST">
           @csrf
           <label>Questions</label>

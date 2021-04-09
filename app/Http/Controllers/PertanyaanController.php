@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Question;
 
 class PertanyaanController extends Controller
 {
@@ -14,7 +15,8 @@ class PertanyaanController extends Controller
      */
     public function index()
     {
-        $newquestion = DB::table('newquestion')->get( );
+        // $newquestion = DB::table('newquestion')->orderBy('updated_at', 'desc')->get();
+        $newquestion = Question::orderBy('updated_at', 'desc')->get();
         return view('task15\table', compact('newquestion'));
     }
 
@@ -25,7 +27,8 @@ class PertanyaanController extends Controller
      */
     public function create()
     {
-        $newquestion = DB::table('newquestion')->get( );
+        // $newquestion = DB::table('newquestion')->orderBy('updated_at', 'desc')->get();
+        $newquestion = Question::orderBy('updated_at', 'desc')->get();
         return view('task15\create', compact('newquestion'));
         // return view('task15\table');
     }
@@ -38,12 +41,14 @@ class PertanyaanController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('newquestion')->insert([
+        // DB::table('newquestion')->insert([
+        //     'task' => $request->task,
+        //     'created_at' => date('Y-m-d H:i:s'),
+        //     'updated_at' => date('Y-m-d H:i:s')
+        // ]);
+        Question::create([
             'task' => $request->task,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
         ]);
-
         return redirect(url('/pertanyaan'));
     }
 
@@ -55,7 +60,8 @@ class PertanyaanController extends Controller
      */
     public function show($id)
     {
-        $data = DB::table('newquestion')->where('id', $id)->first();
+        // $data = DB::table('newquestion')->where('id', $id)->first();
+        $data = Question::where('id', $id)->first();
         return view('task15\show', compact('data'));
     }
 
@@ -67,7 +73,8 @@ class PertanyaanController extends Controller
      */
     public function edit($id)
     {
-        $newquestion = DB::table('newquestion')->where('id', $id)->first();
+        // $newquestion = DB::table('newquestion')->where('id', $id)->first();
+        $newquestion = Question::where('id', $id)->first();
         return view('task15\edit', compact('newquestion'));
     }
 
@@ -80,9 +87,12 @@ class PertanyaanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        DB::table('newquestion')->where('id', '=', $id)->update([
+        // DB::table('newquestion')->where('id', '=', $id)->update([
+        //     'task' => $request->task,
+        //     'updated_at' => date('Y-m-d H:i:s')
+        // ]);
+        Question::where('id', '=', $id)->update([
             'task' => $request->task,
-            'updated_at' => date('Y-m-d H:i:s')
         ]);
         return redirect(url('/pertanyaan'));
     }
@@ -95,7 +105,8 @@ class PertanyaanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('newquestion')->delete($id);
+        // DB::table('newquestion')->delete($id);
+        Question::find($id)->delete();
         return redirect(url('/pertanyaan'));
     }
 }
