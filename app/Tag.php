@@ -4,11 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Tag extends Model
 {
-    protected $table ='user';
+    protected $table = 'tag';
+
     protected $fillable=[
-        'id','name','email','photo'
+        'id','isi','pertanyaan_id'
     ];
     protected $hidden=[
         'created_at','updated_at'
@@ -16,6 +17,6 @@ class User extends Model
 
     public function pertanyaan()
     {
-        return $this->hasMany(Pertanyaan::class,'user_id','id');
+        return $this->hasMany(Pertanyaan::class);
     }
 }
