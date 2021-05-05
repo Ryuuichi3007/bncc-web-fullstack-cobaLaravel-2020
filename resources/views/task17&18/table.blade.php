@@ -8,8 +8,8 @@
   <title>Daftar Pertanyaan</title>
 </head>
 <body>
-  <h1>List Pertanyaan</h1>
-  <a class="btn btn-primary" href="{{url('/pertanyaan/create')}}" role="button">Add Question</a>
+  <h1>List User</h1>
+  {{-- <a class="btn btn-primary" href="{{url('/pertanyaan/create')}}" role="button">Add Question</a> --}}
   {{-- @include('task15\create') --}}
 
   <hr>
@@ -18,19 +18,13 @@
   <table style="width:50%">
     <tr>
       <th>User</th>
-      <th>List Questions</th>
-      {{-- <th>Correct Answer</th> --}}
-      {{-- <th>Edit</th> --}}
-      {{-- <th>Delete</th> --}}
+      <th>List Pertanyaan</th>
     </tr>
     
     @foreach ($data as $table) 
       <tr>
         <td>{{$table->name}} &nbsp;</td>
-        <td><a href="{{url('/show/pertanyaan') . '/' . $table->id}}">Klik untuk Details</a></td>
-        {{-- <><a class="btn btn-success" href="{{url('/pertanyaan/show') . '/' . $table->id}}" role="button">Details</a></>
-        <td><a class="btn btn-primary" href="{{url('/pertanyaan/edit') . '/' . $table->id}}" role="button">Edit</a> &nbsp;</td>
-        <td><a class="btn btn-danger" href="{{url('/pertanyaan') . '/' . $table->id}}" role="button">Delete</a></td> --}}
+        <td><a href="{{url('database/show/pertanyaan') . '/' . $table->id}}">Klik untuk Details</a></td>
       </tr>
     @endforeach
   </table>

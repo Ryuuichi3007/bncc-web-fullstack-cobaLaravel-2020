@@ -45,18 +45,28 @@ use Illuminate\Support\Facades\Route;
 
 // Route::resource('/pertanyaan', 'Pertanyaan_Controller');
 
-Route::get('/', 'MainController@index');
+Route::group(['middleware'=>['auth']],function ()
+{
+  Route::get('/', function(){
+    return view('welcome1');
+  });
+  Route::get('/database', 'MainController@index');
+  Route::get('/database/show/pertanyaan/{id}', 'MainController@show1');
+  Route::get('/database/show/pertanyaan/details/{id}', 'MainController@show2');
+  Route::get('/database/pertanyaan/create', 'MainController@create');
+  Route::post('/database/show/pertanyaan', 'MainController@store');
+  Route::get('/database/pertanyaan/edit/{id}', 'MainController@edit');
+  Route::post('/database/show/pertanyaan/{id}', 'MainController@update');
+  Route::get('/database/show/pertanyaan/delete/{id}', 'MainController@destroy');
+});
 
-Route::get('/show/pertanyaan/{id}', 'MainController@show');
-
-Route::get('/show/pertanyaan/answer/{id}', 'MainController@show2');
-
-Route::get('/show/pertanyaan/right_answer/{id}', 'MainController@show3');
-
-Route::get('/show/pertanyaan/tag/{id}', 'MainController@show4');
 // Route::get('pertanyaan', function ()
 // {
 //   $pertanyaan = App\Pertanyaan::all();
 //   return response()->json($pertanyaan);
 // });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

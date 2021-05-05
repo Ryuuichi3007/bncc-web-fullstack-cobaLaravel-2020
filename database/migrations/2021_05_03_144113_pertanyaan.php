@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddJawabanIdToPertanyaanTable extends Migration
+class Pertanyaan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,14 @@ class AddJawabanIdToPertanyaanTable extends Migration
      */
     public function up()
     {
+        Schema::create('pertanyaan', function (Blueprint $table) {
+            $table->id();
+            $table->string('isi');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
+        });
         Schema::table('pertanyaan', function (Blueprint $table) {
-            $table->foreignId('jawaban_id');
+            $table->foreign('user_id')->references('id')->on('user');
         });
     }
 
@@ -25,8 +31,6 @@ class AddJawabanIdToPertanyaanTable extends Migration
      */
     public function down()
     {
-        Schema::table('pertanyaan', function (Blueprint $table) {
-            $table->dropColumn('jawaban_id');
-        });
+        Schema::dropIfExists('pertanyaan');
     }
 }

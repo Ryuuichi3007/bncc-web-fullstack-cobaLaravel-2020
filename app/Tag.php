@@ -14,9 +14,8 @@ class Tag extends Model
     protected $hidden=[
         'created_at','updated_at'
     ];
-
     public function pertanyaan()
     {
-        return $this->hasMany(Pertanyaan::class);
+        return $this->belongsToMany(Pertanyaan::class);
     }
 }

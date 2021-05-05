@@ -8,6 +8,12 @@
   <title>Data Pertanyaan yang ingin ditampilkan</title>
 </head>
 <body>
+  @foreach ($data as $pertanyaan)
+    <h1>Pertanyaan</h1>
+    <hr><br>
+    <h4>{{$pertanyaan->isi}}</h4>
+    <p>asked from {{$pertanyaan->user->name}}</p>
+  @endforeach
   <table style="width:50%">
     <tr>
       <th>Answer</th>
@@ -15,13 +21,22 @@
       <th>Updated_At</th>
     </tr>
   
-    @foreach ($data2 as $table)
+    @foreach ($data as $table)
       @foreach ($table->jawaban as $answer)
-      <tr>
-        <td>{{$answer->isi}}</td>
-        <td>{{$answer->created_at}}</td>
-        <td>{{$answer->updated_at}}</td>
-      </tr>
+        @if ($table->jawabanBenar_id == $answer['id'])
+          <tr>
+            <td>{{$answer->isi}}</td>
+            <td>{{$answer->created_at}}</td>
+            <td>{{$answer->updated_at}}</td>
+            <td style="background-color: yellow">Correct Answer</td>
+          </tr>
+        @else
+          <tr>
+            <td>{{$answer->isi}}</td>
+            <td>{{$answer->created_at}}</td>
+            <td>{{$answer->updated_at}}</td>
+          </tr>
+        @endif
       @endforeach
     @endforeach
 
@@ -29,6 +44,6 @@
 
   <br>
 
-  <a class="btn btn-primary" href="{{url('/')}}" role="button">Back</a>
+  <a class="btn btn-primary" href="{{url('/database')}}" role="button">Back</a>
 </body>
 </html>

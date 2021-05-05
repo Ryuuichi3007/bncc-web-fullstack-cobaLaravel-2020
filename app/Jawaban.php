@@ -14,7 +14,6 @@ class Jawaban extends Model
     protected $hidden=[
         'created_at','updated_at'
     ];
-
     public function pertanyaan()
     {
         return $this->belongsTo(Pertanyaan::class);
